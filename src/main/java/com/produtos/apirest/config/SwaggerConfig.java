@@ -38,7 +38,7 @@ public class SwaggerConfig {
                 "1.0",
                 "Terms of Service",
                 new Contact("Gustavo Menezes", "https://www.github.com/gustavomenezesh",
-                        "michellidibrito@gmail.com"),
+                        "menezesguga@gmail.com"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licesen.html", new ArrayList<VendorExtension>()
         );
