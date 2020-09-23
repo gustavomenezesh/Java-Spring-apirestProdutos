@@ -28,10 +28,6 @@ public class Produto implements Serializable{
 	
 	private BigDecimal valor;
 	
-	@ManyToMany(targetEntity=Venda.class)
-	private Set vendas;
-	
-	
 	public long getId() {
 		return id;
 	}
@@ -56,14 +52,6 @@ public class Produto implements Serializable{
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-	public Set getVendas() {
-		return vendas;
-	}
-	public void setVendas(Set vendas) {
-		this.vendas = vendas;
-	}
-	
-	
 	
 
 }
