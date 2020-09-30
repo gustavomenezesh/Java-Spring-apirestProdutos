@@ -46,17 +46,19 @@ public class ProdutoResource {
 		return produtoRepository.save(produto);
 	}
 	
-	@DeleteMapping("/produto")
-	@ApiOperation(value="Deleta um produto")
-	public void deletaProduto(@RequestBody Produto produto) {
-		produtoRepository.delete(produto);
-	}
 	
 	@PutMapping("/produto")
 	@ApiOperation(value="Atualiza um produto")
 	public Produto atualizaProduto(@RequestBody Produto produto) {
 		return produtoRepository.save(produto);
 	}
+	
+	@GetMapping("/produtosName/{nome}")
+	@ApiOperation(value="Busca produtos pelo nome")
+	public List<Produto> listProdutosByname(@PathVariable(value="nome") String nome){
+		return produtoRepository.findByName(nome);
+	}
+	
 	
 	
 	

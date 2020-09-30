@@ -24,6 +24,12 @@ public class Produto implements Serializable{
 	
 	private String nome;
 	
+	public Produto(long id, String nome, BigDecimal quantidade, BigDecimal valor) {
+		this.id = id;
+		this.nome = nome;
+		this.quantidade = quantidade;
+		this.valor = valor;
+	}
 	private BigDecimal quantidade;
 	
 	private BigDecimal valor;

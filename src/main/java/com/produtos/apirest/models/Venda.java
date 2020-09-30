@@ -2,13 +2,14 @@ package com.produtos.apirest.models;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,10 +24,8 @@ private static final long serialVersionUID = 1L;
 	
 	private BigDecimal valor;
 	
-	private String date;
+	private LocalDate date;
 	
-	@ManyToMany(targetEntity=Produto.class)
-	private Set produtos;
 
 	public long getId() {
 		return id;
@@ -44,22 +43,23 @@ private static final long serialVersionUID = 1L;
 		this.valor = valor;
 	}
 
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
-	public Set getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(Set produtos) {
-		this.produtos = produtos;
+	public Venda(long id, BigDecimal valor, LocalDate date) {
+		this.id = id;
+		this.valor = valor;
+		this.date = date;
 	}
 	
+	public Venda() {
+		
+	}
 	
 	
 }
