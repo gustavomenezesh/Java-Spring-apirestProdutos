@@ -71,7 +71,6 @@ public class VendaResource{
 		
 		for(int i = 0; i < vendaAux.getItens().size(); i=i+2) {
 			VendaProdutoKey vendaProdutoKey = new VendaProdutoKey(vendaAux.getItens().get(i), idVenda);
-			System.out.println(vendaProdutoKey.getVendaId()+" "+vendaProdutoKey.getProdutoId());
 			VendaProduto vendaProduto = new VendaProduto(vendaProdutoKey, (int)(long)vendaAux.getItens().get(i+1));		
 			jdbcTemplate.update("INSERT INTO venda_produto (produto_id, venda_id, qnt) VALUES (?, ?, ?)", vendaProduto.getId().getProdutoId(), vendaProduto.getId().getVendaId(), vendaProduto.getQnt());
 		}
