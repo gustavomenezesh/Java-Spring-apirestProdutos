@@ -1,5 +1,6 @@
 package com.produtos.apirest.resources;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,14 +66,25 @@ public class VendaResource{
 	@PostMapping("/venda")
 	@ApiOperation(value="Salva uma nova venda")
 	public Venda salvaVenda(@RequestBody VendaAux vendaAux) {
+	
+		for(int i = 0; i < vendaAux.getItens().size(); i=i+2) {
+			
+		}
 		
 		Venda vendaRealizada = vendaRepository.save(vendaAux.getVenda());
 		Long idVenda = vendaRealizada.getId();
 		
 		for(int i = 0; i < vendaAux.getItens().size(); i=i+2) {
+			final int index = i;
 			VendaProdutoKey vendaProdutoKey = new VendaProdutoKey(vendaAux.getItens().get(i), idVenda);
 			VendaProduto vendaProduto = new VendaProduto(vendaProdutoKey, (int)(long)vendaAux.getItens().get(i+1));		
 			jdbcTemplate.update("INSERT INTO venda_produto (produto_id, venda_id, qnt) VALUES (?, ?, ?)", vendaProduto.getId().getProdutoId(), vendaProduto.getId().getVendaId(), vendaProduto.getQnt());
+			jdbcTemplate.query("SELECT * FROM tb_produto WHERE id=?", new Object[] {vendaAux.getItens().get(i)}, (rs, rowNum)-> new Produto(
+					rs.getLong("id"), rs.getString("nome"), rs.getBigDecimal("quantidade"), rs.getBigDecimal("valor"))).forEach(produto->{
+						BigDecimal qnt = new BigDecimal(vendaAux.getItens().get(index+1));
+						jdbcTemplate.update("UPDATE tb_produto SET quantidade=? WHERE id=?", produto.getQuantidade().subtract(qnt), produto.getId());
+					}
+			);;
 		}
 		
 		return vendaRealizada;
